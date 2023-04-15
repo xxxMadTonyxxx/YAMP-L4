@@ -1,19 +1,43 @@
-﻿#include <iostream>
+#include <iostream>
 using namespace std;
 int main() {
-	int* pa, * pb;
-	pa = new int; // выделяется 4 Б из «кучи»
-	*pa = 21;
-	pb = pa; // pb и pa указывают на одну область памяти
-	cout << *pa << "\t" << *pb << "\t" << pa << "\t" << pb << endl;
-	pb = new int; // выделяется 4 Б из «кучи»
-	*pb = 28;
-	cout << *pa << "\t" << *pb << "\t" << pa << "\t" << pb << endl;
-	//освобождаем pb
-	delete pb;
-	cout << *pa << "\t" << *pb << "\t" << pa << "\t" << pb << endl;
-	//освобождаем pa
-	delete pa;
-	system("pause");
-	return 0;
+	setlocale(LC_ALL, "Russian");
+	srand(time(0));
+	int i, N;
+	cout << "Введите размер массива" << endl;
+	cin >> N;
+	int* A = new int[N];
+	for (i = 0; i < N; i++) {
+		*(A + i) = rand() % 101 - 50;
+	}
+	cout << endl << "Исходный массив" << endl;
+	for (i = 0; i < N; i++) {
+		cout << *(A + i) << " ";
+	}
+	cout << endl;
+	bool flag = false;
+	for (i = 0; i < N; i++) {
+		if (*(A + i) < 0) {
+			flag = true;
+		}
+	}
+	if (flag) {
+		int summ = 0;
+		cout << "Отрицательные элементы массива" << endl;
+		for (i = 0; i < N; i++) {
+			if (*(A + i) < 0) {
+				summ += *(A + i);
+			}
+		} cout << summ << endl;
+	}
+	else {
+		cout << "Нет отрицательных элементов массива" << endl;
+	}
+	cout << "Вдреса чётных элементов массива" << endl;
+	for (i = 0; i < N; i++) {
+		if (*(A + i) % 2 == 0) {
+			cout << (A + i) << " ";
+		}
+
+	}
 }
